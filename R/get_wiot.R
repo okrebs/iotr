@@ -22,6 +22,7 @@ is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  {
 #'  Economics., 23: 575–605, www.wiod.org
 #' @example man/examples/wiod.R
 #' @export get_wiot
+#' @importFrom dplyr mutate
 
 get_wiot <- function(cache_dir = NULL, years = 2000:2014,
                      url = paste0("http://www.wiod.org/protected3/",
