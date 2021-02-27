@@ -1,15 +1,14 @@
 Package: iotr
-Title: What the Package Does (One Line, Title Case)
+Title: Obtain, Tidy and Modify Input-Output Tables For Quantitative Economics
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Oliver",
+           family = "Krebs",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+           email = "oliver.b.krebs@gmail.cm",
+           comment = c(ORCID = "https://orcid.org/0000-0002-6217-5880"))
+Description: Package for working with Input Output Tables in quantitativ economics.
+License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
