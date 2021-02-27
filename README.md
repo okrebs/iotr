@@ -4,6 +4,8 @@
 # iotr
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/okrebs/iotr/workflows/R-CMD-check/badge.svg)](https://github.com/okrebs/iotr/actions)
 <!-- badges: end -->
 
 ## Overview
