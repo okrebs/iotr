@@ -22,11 +22,14 @@ is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  {
 #'  Economics., 23: 575–605, www.wiod.org
 #' @example man/examples/wiod.R
 #' @export get_wiot
-#' @importFrom dplyr mutate
+#' @importFrom magrittr %>%
 
 get_wiot <- function(cache_dir = NULL, years = 2000:2014,
                      url = paste0("http://www.wiod.org/protected3/",
                                   "data16/wiot_ROW/wiot_r_Nov16.zip")) {
+
+  # avid note in RMD check for predefined name of WIOD data
+  wiot <- NULL
 
   if(is.null(cache_dir)) {
     message("No cache directory given.",
@@ -51,10 +54,10 @@ get_wiot <- function(cache_dir = NULL, years = 2000:2014,
     message("No or incomplete cache found. Downloading data.")
 
     tmp_file <- tempfile()
-    download.file(url, tmp_file)
+    utils::download.file(url, tmp_file)
 
     message("Unzipping data.")
-    unzip(tmp_file, exdir = cache_dir)
+    utils::unzip(tmp_file, exdir = cache_dir)
   }
 
   message("Loading and combining WIOT years.")
@@ -65,9 +68,8 @@ get_wiot <- function(cache_dir = NULL, years = 2000:2014,
   }
 
   # change some basic type choices made by WIOD
-  wiot_all_years <- dplyr::mutate(wiot_all_years,
-                                  Year = as.integer(Year),
-                                  RNr = as.integer(RNr))
+  wiot_all_years$Year <- as.integer(wiot_all_years$Year)
+  wiot_all_years$RNr <- as.integer(wiot_all_years$RNr)
 
   return(wiot_all_years)
 }
