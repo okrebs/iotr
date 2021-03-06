@@ -29,11 +29,11 @@ iot <- wiot_long \%>\%
   filter(Country != "TOT") \%>\%
   select(origin = Country, sector = RNr, destination, use, flow)
 
-iot <- remove_negative_vad(iot, category_to_scale = 57)
+iot <- rm_negative_vad(iot, category_to_scale = 57)
 
-iot <- remove_dynamic_categories(iot,
-                                 dynamic_categories = c(60, 61),
-                                 category_to_scale = 57)
+iot <- rm_dynamics(iot, dynamic_categories = c(60, 61), category_to_scale = 57)
+
+iot <- gen_own_trade(iot, max_replace = 1e-6)
 }
 \seealso{
 \code{\link{get_wiot}} for downloading WIOT tables

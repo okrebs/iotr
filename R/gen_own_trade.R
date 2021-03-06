@@ -32,5 +32,5 @@ gen_own_trade <- function(iot, max_replace) {
                                   any(flow > 0) & origin == destination,
                                 min(max_replace, min(flow[flow != 0])),
                                 flow)) %>%
-    dplyr::ungroup
+    dplyr::ungroup()
 }
