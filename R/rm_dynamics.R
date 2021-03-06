@@ -28,16 +28,16 @@
 #'   columns \code{origin}, \code{sector}, \code{destination}, \code{use} and
 #'   \code{flow}
 #' @example man/examples/wiod.R
-#' @export remove_dynamic_categories
+#' @export rm_dynamics
 #' @importFrom magrittr %>%
 
-remove_dynamic_categories <- function(iot,
-                                      dynamic_categories,
-                                      category_to_scale) {
+rm_dynamics <- function(iot,
+                        dynamic_categories,
+                        category_to_scale) {
   # due to NSE notes in R CMD check
   origin <- destination <- sector <- use <- flow <- demand <- NULL
 
-  n_locations <- iot$origin %>% unique() %>% length()
+  n_locations <- length(unique(iot$origin))
   n_sectors <- max(iot$sector)
   first_use_category <- n_sectors + 1
   n_use_categories <- max(iot$use)

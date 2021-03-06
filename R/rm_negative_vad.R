@@ -21,10 +21,10 @@
 #'   columns \code{origin}, \code{sector}, \code{destination}, \code{use} and
 #'   \code{flow}
 #' @example man/examples/wiod.R
-#' @export remove_negative_vad
+#' @export rm_negative_vad
 #' @importFrom magrittr %>%
 
-remove_negative_vad <- function(iot, category_to_scale) {
+rm_negative_vad <- function(iot, category_to_scale) {
 
   # due to NSE notes in R CMD check
   origin <- destination <- sector <- use <- flow <- output <- vad_shr <- NULL
