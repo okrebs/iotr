@@ -1,9 +1,3 @@
-#' @noRd
-#'
-is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  {
-  abs(x - round(x)) < tol
-}
-
 #' Download IO tables from the WIOD
 #'
 #' Function to download the set of world input output tables (wiot) made
