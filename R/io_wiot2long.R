@@ -8,10 +8,10 @@
 #'   format
 #' @seealso \code{\link{get_wiot}} for downloading WIOT tables
 #' @example man/examples/wiod.R
-#' @export wiot2long
+#' @export io_wiot2long
 #' @importFrom magrittr %>%
 #'
-wiot2long <- function(wiot) {
+io_wiot2long <- function(wiot) {
   # due to NSE notes in R CMD check
   IndustryCode <- IndustryDescription <- Year <- RNr <- Country <- TOT <- NULL
   destination_use <- use <- NULL

@@ -15,12 +15,12 @@
 #' Database: the Case of Global Automotive Production", Review of International
 #'  Economics., 23: 575–605, www.wiod.org
 #' @example man/examples/wiod.R
-#' @export get_wiot
+#' @export io_get_wiot
 #' @importFrom magrittr %>%
 
-get_wiot <- function(cache_dir = NULL, years = 2000:2014,
-                     url = paste0("http://www.wiod.org/protected3/",
-                                  "data16/wiot_ROW/wiot_r_Nov16.zip")) {
+io_get_wiot <- function(cache_dir = NULL, years = 2000:2014,
+                        url = paste0("http://www.wiod.org/protected3/",
+                                     "data16/wiot_ROW/wiot_r_Nov16.zip")) {
 
   # avid note in RMD check for predefined name of WIOD data
   wiot <- NULL

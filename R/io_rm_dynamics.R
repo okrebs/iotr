@@ -28,12 +28,12 @@
 #'   columns \code{origin}, \code{sector}, \code{destination}, \code{use} and
 #'   \code{flow}
 #' @example man/examples/wiod.R
-#' @export rm_dynamics
+#' @export io_rm_dynamics
 #' @importFrom magrittr %>%
 
-rm_dynamics <- function(iot,
-                        dynamic_categories,
-                        category_to_scale) {
+io_rm_dynamics <- function(iot,
+                           dynamic_categories,
+                           category_to_scale) {
   # due to NSE notes in R CMD check
   origin <- destination <- sector <- use <- flow <- demand <- NULL
 

@@ -18,10 +18,10 @@
 #' Eppinger, Peter and Felbermayr, Gabriel J. and Krebs, Oliver and
 #' Kukharskyy, Bohdan, COVID-19 Shocking Global Value Chains (2020). CESifo
 #' Working Paper No. 8572, https://ssrn.com/abstract=3702124
-#' @export gen_own_trade
+#' @export io_gen_own_trade
 #' @importFrom magrittr %>%
 
-gen_own_trade <- function(iot, max_replace) {
+io_gen_own_trade <- function(iot, max_replace) {
 
   # avid note in RMD check for predefined names in NSE
   origin <- destination <- sector <- use <- flow <- NULL
