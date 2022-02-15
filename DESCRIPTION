@@ -1,6 +1,6 @@
 Package: iotr
 Title: Obtain, Tidy and Modify Input-Output Tables For Quantitative Economics
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person(given = "Oliver",
            family = "Krebs",
@@ -22,4 +22,6 @@ Imports:
     magrittr,
     dplyr,
     tidyr,
-    utils
+    utils,
+    abind,
+    tibble

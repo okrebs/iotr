@@ -16,33 +16,20 @@
 #'  Economics., 23: 575–605, www.wiod.org
 #' @example man/examples/wiod.R
 #' @export io_load_wiot
-#' @importFrom magrittr %>%
 
-io_load_wiot <- function(cache_dir = NULL, years = 2000:2014, quiet = FALSE) {
+io_load_wiot <- function(cache_dir = NULL,
+                         years = 2000:2014,
+                         quiet = FALSE) {
 
   # avid note in RMD check for predefined name of WIOD data
   wiot <- NULL
 
-  if (is.null(cache_dir)) {
-    if (!quiet) {
-      message(
-        "No cache directory given. Data will be downloaded to a temporary",
-        "directory and deleted with the end of the Rsession."
-      )
-    }
-    cache_dir <- tempdir()
-  } else if (!dir.exists(cache_dir)) {
-    stop("Cache directory does not exist. Create it first.")
-  }
-
-  file_sep <- .Platform$file.sep
-  if(substr(cache_dir, nchar(cache_dir), nchar(cache_dir)) == file_sep) {
-    cache_dir <- substr(cache_dir, 1, nchar(cache_dir) - 1)
-  }
+  cache_dir <- check_cache_dir(cache_dir, quiet)
 
   if(!all(is.wholenumber(years)) | any(years < 2000) | any(years > 2014)) {
     stop("'years' out of range. Must be integers between 2000 and 2014.")
   }
+
   wiot_files <- paste0("WIOT", years, "_October16_ROW.RData")
   if(all(file.exists(file.path(cache_dir, wiot_files)))) {
     if (!quiet) {
@@ -52,18 +39,13 @@ io_load_wiot <- function(cache_dir = NULL, years = 2000:2014, quiet = FALSE) {
     if(!quiet) {
       message("No or incomplete cache found. Downloading data.")
     }
-    cache_dir <-
-      io_dl_wiot(
-        cache_dir = cache_dir,
-        url = paste0("https://dataverse.nl/api/access/datafile/199101"),
-        quiet = quiet
-      )
+    cache_dir <- io_dl_wiot(cache_dir = cache_dir, quiet = quiet)
   }
 
   if(!quiet) message("Loading and combining WIOT years.")
   wiot_all_years <- data.frame()
   for(current_file in wiot_files) {
-    load(paste0(cache_dir, file_sep, current_file))
+    wiot <- load_into(file.path(cache_dir, current_file))
     wiot_all_years <- rbind(wiot_all_years, wiot)
   }
 
