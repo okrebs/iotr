@@ -34,6 +34,8 @@ production. If no negative value added is imputed the IO table is returned
 unchanged.
 }
 \examples{
+#'\dontrun{
+
 library(iotr)
 
 # set cache_dir for WIOD to avoid long download times on every run !!!
@@ -61,4 +63,6 @@ iot <-
                  category_to_scale = 57)
 
 iot <- io_gen_own_trade(iot, max_replace = 1e-6)
+
+#' }
 }

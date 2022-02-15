@@ -19,6 +19,8 @@ Database, usually obtained by a call to io_load_wiot, into a long format
 tibble, i.e. a 'tidy' data frame.
 }
 \examples{
+#'\dontrun{
+
 library(iotr)
 
 # set cache_dir for WIOD to avoid long download times on every run !!!
@@ -46,6 +48,8 @@ iot <-
                  category_to_scale = 57)
 
 iot <- io_gen_own_trade(iot, max_replace = 1e-6)
+
+#' }
 }
 \seealso{
 \code{\link{io_load_wiot}} for (down)loading WIOT tables

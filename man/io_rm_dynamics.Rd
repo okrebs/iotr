@@ -42,6 +42,8 @@ components in the current period the approach relies on a leontief inverse
 to calculate intermediate use based upon the implied new demand.
 }
 \examples{
+#'\dontrun{
+
 library(iotr)
 
 # set cache_dir for WIOD to avoid long download times on every run !!!
@@ -69,4 +71,6 @@ iot <-
                  category_to_scale = 57)
 
 iot <- io_gen_own_trade(iot, max_replace = 1e-6)
+
+#' }
 }

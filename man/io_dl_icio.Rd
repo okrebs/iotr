@@ -7,20 +7,21 @@
 io_dl_icio(
   component,
   cache_dir = NULL,
-  url = list(Rdata =
-    "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=6d8e884e-7983-4899-816d-6ca0a7d46ca4",
-    A =
-    "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=757b2a01-f44e-43c5-a984-74ce4051a629",
-    B =
-    "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=5da20b06-be2d-4bf1-be42-7fa130a9d23b",
-    VB =
-    "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=e5f2e20f-5cb0-450a-b6fb-146a020fa625",
-    Z =
-    "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=c44881c8-54e0-42b4-b8c0-444099592f2c"),
+  url = list(base_url = "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=", Rdata =
+    "6d8e884e-7983-4899-816d-6ca0a7d46ca4", A = "757b2a01-f44e-43c5-a984-74ce4051a629", B
+    = "5da20b06-be2d-4bf1-be42-7fa130a9d23b", VB =
+    "e5f2e20f-5cb0-450a-b6fb-146a020fa625", Z = "c44881c8-54e0-42b4-b8c0-444099592f2c"),
   quiet = FALSE
 )
 }
 \arguments{
+\item{component}{a character with a single component of the ICIO tables to
+load. Options are 'Rdata', 'Z', 'A', 'B', 'VB' which refer to the
+respectively named files from OECD's ICIO website, where 'Z' is the
+intermediate flow matrix, 'Rdata' a set containing all remaining IO table
+components and 'A', 'B' and 'VB' are supplementary matrices. See the OECD's
+ICIO web page http://oe.cd/icio for details.}
+
 \item{cache_dir}{path to cache the ICIO data. If the full content of the ICIO
 data zip file is found under this location it will not be downloaded again.}
 
@@ -28,13 +29,6 @@ data zip file is found under this location it will not be downloaded again.}
 usually not be changed.}
 
 \item{quiet}{if TRUE will try to avoid printing messages}
-
-\item{components}{a character vector with components of the ICIO tables to
-load. Options are 'Rdata', 'Z', 'A', 'B', 'VB' which refer to the
-respectively named files from OECD's ICIO website, where 'Z' is the
-intermediate flow matrix, 'Rdata' a set containing all remaining IO table
-components and 'A', 'B' and 'VB' are supplementary matrices. See the OECD's
-ICIO web page http://oe.cd/icio for details.}
 }
 \value{
 Path to the directory where data was saved, if given, this is
@@ -45,6 +39,8 @@ Function to download the set of inter country input output (icio) tables made
 available by the OECD's 2021 release.
 }
 \examples{
+#'\dontrun{
+
 library(iotr)
 
 # set cache_dir for ICIO to avoid (very) long download times on every run !!!
@@ -55,6 +51,7 @@ icio_raw <- io_load_icio(cache_dir,
                          components = c("Z", "CONS", "GFCF", "INVNT", "NONRES"))
 
 icio <- io_tidy_icio(icio_raw)
+#' }
 }
 \references{
 OECD (2021), OECD Inter-Country Input-Output Database,

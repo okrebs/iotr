@@ -3,7 +3,7 @@
 #' Function to download the set of inter country input output (icio) tables made
 #' available by the OECD's 2021 release.
 #'
-#' @param components a character vector with components of the ICIO tables to
+#' @param component a character with a single component of the ICIO tables to
 #'   load. Options are 'Rdata', 'Z', 'A', 'B', 'VB' which refer to the
 #'   respectively named files from OECD's ICIO website, where 'Z' is the
 #'   intermediate flow matrix, 'Rdata' a set containing all remaining IO table
@@ -24,11 +24,12 @@
 io_dl_icio <- function(component,
                        cache_dir = NULL,
                        url = list(
-                         "Rdata" = "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=6d8e884e-7983-4899-816d-6ca0a7d46ca4",
-                         "A" = "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=757b2a01-f44e-43c5-a984-74ce4051a629",
-                         "B" = "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=5da20b06-be2d-4bf1-be42-7fa130a9d23b",
-                         "VB" = "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=e5f2e20f-5cb0-450a-b6fb-146a020fa625",
-                         "Z" = "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=c44881c8-54e0-42b4-b8c0-444099592f2c"
+                         "base_url" = "https://stats.oecd.org/wbos/fileview2.aspx?IDFile=",
+                         "Rdata" = "6d8e884e-7983-4899-816d-6ca0a7d46ca4",
+                         "A" = "757b2a01-f44e-43c5-a984-74ce4051a629",
+                         "B" = "5da20b06-be2d-4bf1-be42-7fa130a9d23b",
+                         "VB" = "e5f2e20f-5cb0-450a-b6fb-146a020fa625",
+                         "Z" = "c44881c8-54e0-42b4-b8c0-444099592f2c"
                        ),
                        quiet = FALSE) {
 
@@ -43,7 +44,9 @@ io_dl_icio <- function(component,
 
   if(!quiet) message("Downloading data. This may take several minutes.")
 
-  utils::download.file(url[component], tmp_file, quiet = quiet)
+  # avoid 90 character CRAN line length limit in \usage
+  full_url <- paste0(url[["base_url"]], url[[component]])
+  utils::download.file(full_url, tmp_file, quiet = quiet)
   options("timeout" = timeout_bak)
 
   if(!quiet) message("Unzipping data.")

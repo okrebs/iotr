@@ -27,6 +27,8 @@ Function to download the set of world input output tables (wiot) made
 available by the World Input Output Database's (WIOD) 2016 release.
 }
 \examples{
+#'\dontrun{
+
 library(iotr)
 
 # set cache_dir for WIOD to avoid long download times on every run !!!
@@ -54,6 +56,8 @@ iot <-
                  category_to_scale = 57)
 
 iot <- io_gen_own_trade(iot, max_replace = 1e-6)
+
+#' }
 }
 \references{
 Timmer, M. P., Dietzenbacher, E., Los, B., Stehrer, R. and de

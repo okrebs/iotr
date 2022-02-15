@@ -19,6 +19,8 @@ Function to turn a list of OECD ICIO components, usually obtained from a call
 to \code{io_load_icio()}, into a tibble, i.e. a 'tidy' data frame.
 }
 \examples{
+#'\dontrun{
+
 library(iotr)
 
 # set cache_dir for ICIO to avoid (very) long download times on every run !!!
@@ -29,6 +31,7 @@ icio_raw <- io_load_icio(cache_dir,
                          components = c("Z", "CONS", "GFCF", "INVNT", "NONRES"))
 
 icio <- io_tidy_icio(icio_raw)
+#' }
 }
 \references{
 OECD (2021), OECD Inter-Country Input-Output Database,
