@@ -27,16 +27,41 @@ Download and convert I-O-data from different sources.
 
 Currently supported databases:
 
-- WIOD:
+- WIOD (see Timmer et al. 2015):
+    - download tables
+    - convert to standardized long format
+
+- OECD's ICIO (see OECD 2021):
     - download tables
     - convert to standardized long format
 
 Planned support:
 
 - Eora
-- OECD I-O-tables
 - USITC ITPD-IO
 - Eurostat
+    
+Additional functionality (possibly outsourced/removed in the future):
+
+- remove 'dynamic' demand categories, e.g. inventory or GFCF, following the 
+method proposed in Costino and Rodríguez-Clare (2014)
+
+- remove entries with negative value added from and IO-table by scaling demand
+
+- remove entries where exports but no "own trade" exists by replacing them with
+small entries
+
+References: 
+- OECD (2021). OECD Inter-Country Input-Output Database. http://oe.cd/icio.
+
+- Timmer, Marcel P., Dietzenbacher, Erik, Los, Bart, Stehrer, Robert and de
+Vries, Gaaitzen J. (2015). An Illustrated User Guide to the World Input–Output
+Database: the Case of Global Automotive Production. Review of International
+Economics, 23: 575–605.
+
+- Costinot, Arnaud and Rodríguez-Clare, Andrés (2014). Trade Theory
+with Numbers: Quantifying the Consequences of Globalization. Handbook of 
+International Economics, 4:197:261.
 
 ## Installation
 
@@ -53,9 +78,11 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("okrebs/iotr")
 ```
 
-## Example
+Early development version, all functionality is subject to change!
 
-This is a basic example which shows you how to solve a common problem:
+## Examples
+
+See "man/examples/wiod.R" and "man/examples/icio.R
 
 ```{r example}
 library(iotr)
