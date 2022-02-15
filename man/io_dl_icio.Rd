@@ -36,22 +36,8 @@ identical to \code{cache_dir}
 }
 \description{
 Function to download the set of inter country input output (icio) tables made
-available by the OECD's 2021 release.
-}
-\examples{
-\dontrun{
-
-library(iotr)
-
-# set cache_dir for ICIO to avoid (very) long download times on every run !!!
-cache_dir <- NULL
-
-icio_raw <- io_load_icio(cache_dir,
-                         years = 2010:2012,
-                         components = c("Z", "CONS", "GFCF", "INVNT", "NONRES"))
-
-icio <- io_tidy_icio(icio_raw)
-}
+available by the OECD's 2021 release. Should usually not be called directly
+but through \code{io_load_icio()}.
 }
 \references{
 OECD (2021), OECD Inter-Country Input-Output Database,

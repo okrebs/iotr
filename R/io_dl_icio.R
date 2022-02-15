@@ -1,7 +1,8 @@
 #' Download IO tables from the OECD ICIO
 #'
 #' Function to download the set of inter country input output (icio) tables made
-#' available by the OECD's 2021 release.
+#' available by the OECD's 2021 release. Should usually not be called directly
+#' but through \code{io_load_icio()}.
 #'
 #' @param component a character with a single component of the ICIO tables to
 #'   load. Options are 'Rdata', 'Z', 'A', 'B', 'VB' which refer to the
@@ -18,7 +19,6 @@
 #'   identical to \code{cache_dir}
 #' @references OECD (2021), OECD Inter-Country Input-Output Database,
 #'   http://oe.cd/icio
-#' @example man/examples/icio.R
 #' @export io_dl_icio
 
 io_dl_icio <- function(component,
