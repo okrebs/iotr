@@ -21,9 +21,6 @@ io_load_wiot <- function(cache_dir = NULL,
                          years = 2000:2014,
                          quiet = FALSE) {
 
-  # avid note in RMD check for predefined name of WIOD data
-  wiot <- NULL
-
   cache_dir <- check_cache_dir(cache_dir, quiet)
 
   if(!all(is.wholenumber(years)) | any(years < 2000) | any(years > 2014)) {

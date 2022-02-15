@@ -32,9 +32,6 @@ io_load_icio <- function(cache_dir = NULL,
                          components = c("Rdata", "Z"),
                          quiet = FALSE) {
 
-  # avoid note in RMD check for predefined names of ICIO data
-  ICIO2021econA <-ICIO2021econB <- ICIO2021econVB <-ICIO2021econZ <- NULL
-
   cache_dir <- check_cache_dir(cache_dir, quiet)
 
   if(!all(is.wholenumber(years)) | any(years < 1995) | any(years > 2018)) {

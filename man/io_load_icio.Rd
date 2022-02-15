@@ -42,7 +42,7 @@ Function to download the set of inter country input output (icio) tables made
 available by the OECD's 2021 release.
 }
 \examples{
-#'\dontrun{
+\dontrun{
 
 library(iotr)
 
@@ -54,7 +54,7 @@ icio_raw <- io_load_icio(cache_dir,
                          components = c("Z", "CONS", "GFCF", "INVNT", "NONRES"))
 
 icio <- io_tidy_icio(icio_raw)
-#' }
+}
 }
 \references{
 OECD (2021), OECD Inter-Country Input-Output Database,

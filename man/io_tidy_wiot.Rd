@@ -19,7 +19,7 @@ Database, usually obtained by a call to io_load_wiot, into a long format
 tibble, i.e. a 'tidy' data frame.
 }
 \examples{
-#'\dontrun{
+\dontrun{
 
 library(iotr)
 
@@ -49,7 +49,7 @@ iot <-
 
 iot <- io_gen_own_trade(iot, max_replace = 1e-6)
 
-#' }
+}
 }
 \seealso{
 \code{\link{io_load_wiot}} for (down)loading WIOT tables

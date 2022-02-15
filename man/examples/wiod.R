@@ -1,4 +1,4 @@
-#'\dontrun{
+\dontrun{
 
 library(iotr)
 
@@ -28,4 +28,4 @@ iot <-
 
 iot <- io_gen_own_trade(iot, max_replace = 1e-6)
 
-#' }
+}

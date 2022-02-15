@@ -34,7 +34,7 @@ production. If no negative value added is imputed the IO table is returned
 unchanged.
 }
 \examples{
-#'\dontrun{
+\dontrun{
 
 library(iotr)
 
@@ -64,5 +64,5 @@ iot <-
 
 iot <- io_gen_own_trade(iot, max_replace = 1e-6)
 
-#' }
+}
 }

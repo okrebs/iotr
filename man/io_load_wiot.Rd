@@ -24,7 +24,7 @@ Function to load the set of world input output tables (wiot) made
 available by the World Input Output Database's (WIOD) 2016 release.
 }
 \examples{
-#'\dontrun{
+\dontrun{
 
 library(iotr)
 
@@ -54,7 +54,7 @@ iot <-
 
 iot <- io_gen_own_trade(iot, max_replace = 1e-6)
 
-#' }
+}
 }
 \references{
 Timmer, M. P., Dietzenbacher, E., Los, B., Stehrer, R. and de

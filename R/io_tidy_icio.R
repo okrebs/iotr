@@ -9,9 +9,14 @@
 #' @references OECD (2021), OECD Inter-Country Input-Output Database,
 #'   http://oe.cd/icio
 #' @example man/examples/icio.R
+#' @importFrom rlang :=
 #' @export io_tidy_icio
 
 io_tidy_icio <- function(icio, quiet = FALSE) {
+
+  # avid note in RMD check for predefined column names
+  flow <- type <- name <- origin <- destination <- sector <- use <- year <- NULL
+  row_id <- col_id <- NULL
 
   components <- names(icio)
   if(any(components != check_icio_components(names(icio), "all"))) {
@@ -33,11 +38,10 @@ io_tidy_icio <- function(icio, quiet = FALSE) {
             i %in% c("VA", "VAexTAX") ~ c("destination", "use", "sector"),
             i == "X" ~ c("origin", "sector", "use")
           )
-        tmp_t <- dplyr
-          tidyr::separate(tmp_t,
-                          name,
-                          into = new_cols[1:2],
-                          sep = "_")
+        tmp_t <- tidyr::separate(tmp_t,
+                                 name,
+                                 into = new_cols[1:2],
+                                 sep = "_")
         tmp_t <- dplyr::rename(tmp_t, "{new_cols[3]}" := type)
       } else if(n_dims == 2) {
         tmp_t <- tibble::as_tibble(tmp_t, rownames = "row_id")

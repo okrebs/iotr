@@ -42,7 +42,7 @@ components in the current period the approach relies on a leontief inverse
 to calculate intermediate use based upon the implied new demand.
 }
 \examples{
-#'\dontrun{
+\dontrun{
 
 library(iotr)
 
@@ -72,5 +72,5 @@ iot <-
 
 iot <- io_gen_own_trade(iot, max_replace = 1e-6)
 
-#' }
+}
 }

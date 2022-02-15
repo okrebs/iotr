@@ -24,4 +24,5 @@ Imports:
     tidyr,
     utils,
     abind,
-    tibble
+    tibble,
+    rlang
