@@ -81,12 +81,10 @@ subplot_wiot_map <- function(subplot_data, plot_data) {
       option = "A",
       direction = -1,
       na.value = "grey90",
-      breaks = round(
+      breaks =
         seq(min(plot_data$data_column, na.rm = TRUE),
             max(plot_data$data_column, na.rm = TRUE),
             length.out = 4),
-        2
-      ),
       labels = round(
         seq(min(plot_data$data_column, na.rm = TRUE),
             max(plot_data$data_column, na.rm = TRUE),
