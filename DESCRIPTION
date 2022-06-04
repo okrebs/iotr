@@ -25,6 +25,10 @@ Imports:
     utils,
     abind,
     tibble,
-    rlang
+    rlang,
+    ggplot2,
+    sf,
+    viridis,
+    cowplot
 Depends: 
     R (>= 2.10)
