@@ -13,7 +13,6 @@
 #' @param quiet if TRUE will try to avoid printing messages
 #' @return Return a plot of all WIOD countries filled with the appropriate color
 #' @export io_plot_wiot_map
-
 io_plot_wiot_map <- function(plot_data, row_label = FALSE) {
 
   if (length(colnames(plot_data)) != 2) {
@@ -69,7 +68,7 @@ io_plot_wiot_map <- function(plot_data, row_label = FALSE) {
     nrow = 1, ncol = 3, align = "hv"))
 }
 
-
+#' @noRd
 subplot_wiot_map <- function(subplot_data, plot_data) {
   p <- ggplot2::ggplot(subplot_data) +
     ggplot2::geom_sf(
