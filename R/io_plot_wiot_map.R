@@ -91,7 +91,7 @@ subplot_wiot_map <- function(subplot_data, plot_data) {
             length.out = 4),
         2
       ),
-      limits = round(range(plot_data$data_column, na.rm = TRUE), 2)
+      limits = range(plot_data$data_column, na.rm = TRUE)
     ) +
     ggplot2::theme_void() +
     ggplot2::theme(plot.title = ggplot2::element_text(face = "bold", size = 24),
