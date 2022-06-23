@@ -10,10 +10,11 @@
 #'   map
 #' @param row_label if TRUE a label with the value of 'ROW' in '`plot_data`'
 #'   will be placed in the ocean west of Australia
-#' @param quiet if TRUE will try to avoid printing messages
+#' @param percent multiplies label values by 100, TRUE/FALSE
+#' @param suffix character suffix to add to labels, e.g. "%"
 #' @return Return a plot of all WIOD countries filled with the appropriate color
 #' @export io_plot_wiot_map
-io_plot_wiot_map <- function(plot_data, row_label = FALSE) {
+io_plot_wiot_map <- function(plot_data, row_label = FALSE, percent = FALSE, suffix = NULL) {
 
   if (length(colnames(plot_data)) != 2) {
     stop("Plot data must be a dataframe/tibble with a column 'country' and only one further data column")
@@ -34,7 +35,9 @@ io_plot_wiot_map <- function(plot_data, row_label = FALSE) {
 
   plot_america <- subplot_wiot_map(
     sf::st_crop(plot_data, c("xmin" = -170, "xmax" = -35, "ymin" = -60, "ymax" = 80)),
-    plot_data
+    plot_data,
+    percent,
+    suffix
   )
   plot_europe <- subplot_wiot_map(
     sf::st_crop(plot_data, c("xmin" = -10, "xmax" = 45, "ymin" = 35, "ymax" = 70)),
@@ -48,6 +51,13 @@ io_plot_wiot_map <- function(plot_data, row_label = FALSE) {
     ggplot2::theme(legend.position = "none")
 
   if (row_label) {
+
+    row_value <- plot_data$data_column[plot_data$country == "ROW"]
+    if (percent) {
+      row_value <- paste0(round(row_value * 100, 2), "%")
+    } else {
+      row_value <- round(row_value, 2)
+    }
     plot_asia <- plot_asia +
       ggplot2::geom_sf_label(
         # anker to Australie
@@ -55,8 +65,7 @@ io_plot_wiot_map <- function(plot_data, row_label = FALSE) {
         nudge_x = -50,
         nudge_y = 5,
         size = 6,
-        label = paste0("ROW: ",
-                       round(plot_data$data_column[plot_data$country == "ROW"], 2))
+        label = paste0("ROW: ", row_value)
       )
   }
 
@@ -69,7 +78,20 @@ io_plot_wiot_map <- function(plot_data, row_label = FALSE) {
 }
 
 #' @noRd
-subplot_wiot_map <- function(subplot_data, plot_data) {
+subplot_wiot_map <- function(subplot_data, plot_data, percent = FALSE, suffix = NULL) {
+  scale_labels <- seq(
+    min(plot_data$data_column, na.rm = TRUE),
+    max(plot_data$data_column, na.rm = TRUE),
+    length.out = 4)
+  if (percent) {
+    scale_labels <- round(scale_labels * 100, 2)
+  } else {
+    scale_labels <- round(scale_labels, 2)
+  }
+  if (!is.null(suffix)) {
+    scale_labels <- paste0(scale_labels, suffix)
+  }
+
   p <- ggplot2::ggplot(subplot_data) +
     ggplot2::geom_sf(
       color = "white",
@@ -85,12 +107,7 @@ subplot_wiot_map <- function(subplot_data, plot_data) {
         seq(min(plot_data$data_column + 1e-9, na.rm = TRUE),
             max(plot_data$data_column - 1e-9, na.rm = TRUE),
             length.out = 4),
-      labels = round(
-        seq(min(plot_data$data_column, na.rm = TRUE),
-            max(plot_data$data_column, na.rm = TRUE),
-            length.out = 4),
-        2
-      ),
+      labels = scale_labels,
       limits = range(plot_data$data_column, na.rm = TRUE)
     ) +
     ggplot2::theme_void() +

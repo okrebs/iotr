@@ -4,7 +4,7 @@
 \alias{io_plot_wiot_map}
 \title{Visualize data for WIOD countries}
 \usage{
-io_plot_wiot_map(plot_data, row_label = FALSE)
+io_plot_wiot_map(plot_data, row_label = FALSE, percent = FALSE, suffix = NULL)
 }
 \arguments{
 \item{plot_data}{dataframe/tibble containint a column "country" with iso3
@@ -14,7 +14,9 @@ map}
 \item{row_label}{if TRUE a label with the value of 'ROW' in '\code{plot_data}'
 will be placed in the ocean west of Australia}
 
-\item{quiet}{if TRUE will try to avoid printing messages}
+\item{percent}{multiplies label values by 100, TRUE/FALSE}
+
+\item{suffix}{character suffix to add to labels, e.g. "\%"}
 }
 \value{
 Return a plot of all WIOD countries filled with the appropriate color
