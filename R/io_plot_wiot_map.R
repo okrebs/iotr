@@ -54,10 +54,12 @@ io_plot_wiot_map <- function(plot_data, row_label = FALSE, percent = FALSE, suff
 
     row_value <- plot_data$data_column[plot_data$country == "ROW"]
     if (percent) {
-      row_value <- paste0(round(row_value * 100, 2), "%")
+      row_value <- round(row_value * 100, 2)
     } else {
       row_value <- round(row_value, 2)
     }
+    row_value <- paste0(row_value, suffix)
+
     plot_asia <- plot_asia +
       ggplot2::geom_sf_label(
         # anker to Australie
