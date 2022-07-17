@@ -4,7 +4,14 @@
 \alias{io_plot_wiot_map}
 \title{Visualize data for WIOD countries}
 \usage{
-io_plot_wiot_map(plot_data, row_label = FALSE, percent = FALSE, suffix = NULL)
+io_plot_wiot_map(
+  plot_data,
+  row_label = FALSE,
+  percent = FALSE,
+  suffix = NULL,
+  digits = 2,
+  reverse_colors = FALSE
+)
 }
 \arguments{
 \item{plot_data}{dataframe/tibble containint a column "country" with iso3
@@ -17,6 +24,10 @@ will be placed in the ocean west of Australia}
 \item{percent}{multiplies label values by 100, TRUE/FALSE}
 
 \item{suffix}{character suffix to add to labels, e.g. "\%"}
+
+\item{digits}{number of digits to round labels to}
+
+\item{reverse_colors}{if TRUE color scale will be reversed}
 }
 \value{
 Return a plot of all WIOD countries filled with the appropriate color

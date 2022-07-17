@@ -12,9 +12,17 @@
 #'   will be placed in the ocean west of Australia
 #' @param percent multiplies label values by 100, TRUE/FALSE
 #' @param suffix character suffix to add to labels, e.g. "%"
+#' @param digits number of digits to round labels to
+#' @param reverse_colors if TRUE color scale will be reversed
 #' @return Return a plot of all WIOD countries filled with the appropriate color
 #' @export io_plot_wiot_map
-io_plot_wiot_map <- function(plot_data, row_label = FALSE, percent = FALSE, suffix = NULL) {
+io_plot_wiot_map <-
+  function(plot_data,
+           row_label = FALSE,
+           percent = FALSE,
+           suffix = NULL,
+           digits = 2,
+           reverse_colors = FALSE) {
 
   if (length(colnames(plot_data)) != 2) {
     stop("Plot data must be a dataframe/tibble with a column 'country' and only one further data column")
@@ -37,16 +45,20 @@ io_plot_wiot_map <- function(plot_data, row_label = FALSE, percent = FALSE, suff
     sf::st_crop(plot_data, c("xmin" = -170, "xmax" = -35, "ymin" = -60, "ymax" = 80)),
     plot_data,
     percent,
-    suffix
+    suffix,
+    digits,
+    reverse_colors
   )
   plot_europe <- subplot_wiot_map(
     sf::st_crop(plot_data, c("xmin" = -10, "xmax" = 45, "ymin" = 35, "ymax" = 70)),
-    plot_data
+    plot_data,
+    reverse_colors = reverse_colors
   ) +
     ggplot2::theme(legend.position = "none")
   plot_asia <- subplot_wiot_map(
     sf::st_crop(plot_data, c("xmin" = 65, "xmax" = 160, "ymin" = -43, "ymax" = 60)),
-    plot_data
+    plot_data,
+    reverse_colors = reverse_colors
   ) +
     ggplot2::theme(legend.position = "none")
 
@@ -54,10 +66,11 @@ io_plot_wiot_map <- function(plot_data, row_label = FALSE, percent = FALSE, suff
 
     row_value <- plot_data$data_column[plot_data$country == "ROW"]
     if (percent) {
-      row_value <- round(row_value * 100, 2)
+      row_value <- round(row_value * 100, digits)
     } else {
-      row_value <- round(row_value, 2)
+      row_value <- round(row_value, digits)
     }
+    row_value <- sprintf(paste0("%.", digits, "f"), row_value)
     row_value <- paste0(row_value, suffix)
 
     plot_asia <- plot_asia +
@@ -80,16 +93,17 @@ io_plot_wiot_map <- function(plot_data, row_label = FALSE, percent = FALSE, suff
 }
 
 #' @noRd
-subplot_wiot_map <- function(subplot_data, plot_data, percent = FALSE, suffix = NULL) {
+subplot_wiot_map <- function(subplot_data, plot_data, percent = FALSE, suffix = NULL, digits = 1, reverse_colors = FALSE) {
   scale_labels <- seq(
     min(plot_data$data_column, na.rm = TRUE),
     max(plot_data$data_column, na.rm = TRUE),
     length.out = 4)
   if (percent) {
-    scale_labels <- round(scale_labels * 100, 2)
+    scale_labels <- round(scale_labels * 100, digits)
   } else {
-    scale_labels <- round(scale_labels, 2)
+    scale_labels <- round(scale_labels, digits)
   }
+  scale_labels <- sprintf(paste0("%.", digits, "f"), scale_labels)
   if (!is.null(suffix)) {
     scale_labels <- paste0(scale_labels, suffix)
   }
@@ -103,7 +117,7 @@ subplot_wiot_map <- function(subplot_data, plot_data, percent = FALSE, suffix = 
     viridis::scale_fill_viridis(
       NULL,
       option = "A",
-      direction = -1,
+      direction = (-1)^reverse_colors,
       na.value = "grey90",
       breaks =
         seq(min(plot_data$data_column + 1e-9, na.rm = TRUE),
