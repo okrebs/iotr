@@ -33,7 +33,7 @@ io_set_cache_dir <- function(cache_dir = NULL, io_database = NULL) {
     }
     if(is.null(cache_dir)) {
 
-      path_message <- pate0(
+      path_message <- paste0(
         "a path to cache downloaded",
         io_database,
         " raw data. Use 'io_set_cache_dir(new_path)' to reset it later."
@@ -43,12 +43,12 @@ io_set_cache_dir <- function(cache_dir = NULL, io_database = NULL) {
           caption = paste0("Pick ", path_message)
         )
       } else {
-        results_dir <- readline(
-          prompt = pate0("Enter ", path_message)
+        cache_dir <- readline(
+          prompt = paste0("Enter ", path_message)
         )
       }
     }
-    writeLines(cache_dir, results_config_path)
+    writeLines(cache_dir, cache_config_path)
   }
-  return(results_dir)
+  return(cache_dir)
 }
