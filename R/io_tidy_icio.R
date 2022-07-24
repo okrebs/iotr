@@ -67,7 +67,7 @@ io_tidy_icio <- function(icio, quiet = FALSE) {
           tmp_t <- tibble::add_column(tmp_t, use = i)
         }
       }
-      tmp_t <- dplyr::mutate(tmp_t, year = t)
+      tmp_t <- dplyr::mutate(tmp_t, year = as.integer(t))
       tmp <- dplyr::bind_rows(tmp, tmp_t)
     }
     icio[[i]] <- tmp
