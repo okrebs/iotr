@@ -2,6 +2,7 @@
 
 export(io_dl_icio)
 export(io_dl_wiot)
+export(io_extract_production)
 export(io_gen_own_trade)
 export(io_load_icio)
 export(io_load_wiot)

@@ -37,12 +37,18 @@ io_plot_wiot_map <-
   colnames(plot_data)[data_col_id] <- "data_column"
 
   # add geography so that data can be cropped according to subplot maps
-  plot_data <- dplyr::full_join(io_world_map, plot_data, by = "country") %>%
-    sf::st_as_sf()
+  plot_data <- dplyr::full_join(io_world_map, plot_data, by = "country")
   sf::st_agr(plot_data) <- "constant" # avoid warnings
 
+  # bounding box will not cut rectangles with s2 see
+  # https://github.com/r-spatial/sf/issues/1725
+  s2_state <- sf_use_s2()
+  suppressMessages(sf_use_s2(FALSE))
+
   plot_america <- subplot_wiot_map(
-    sf::st_crop(plot_data, c("xmin" = -170, "xmax" = -35, "ymin" = -60, "ymax" = 80)),
+    suppressMessages(
+      sf::st_crop(plot_data, c("xmin" = -170, "xmax" = -35, "ymin" = -60, "ymax" = 80))
+    ),
     plot_data,
     percent,
     suffix,
@@ -50,17 +56,23 @@ io_plot_wiot_map <-
     reverse_colors
   )
   plot_europe <- subplot_wiot_map(
-    sf::st_crop(plot_data, c("xmin" = -10, "xmax" = 45, "ymin" = 35, "ymax" = 70)),
+    suppressMessages(
+      sf::st_crop(plot_data, c("xmin" = -10, "xmax" = 45, "ymin" = 35, "ymax" = 70))
+    ),
     plot_data,
     reverse_colors = reverse_colors
   ) +
     ggplot2::theme(legend.position = "none")
   plot_asia <- subplot_wiot_map(
-    sf::st_crop(plot_data, c("xmin" = 65, "xmax" = 160, "ymin" = -43, "ymax" = 60)),
+    suppressMessages(
+      sf::st_crop(plot_data, c("xmin" = 65, "xmax" = 160, "ymin" = -43, "ymax" = 60))
+    ),
     plot_data,
     reverse_colors = reverse_colors
   ) +
     ggplot2::theme(legend.position = "none")
+
+  suppressMessages(sf_use_s2(s2_state))
 
   if (row_label) {
 

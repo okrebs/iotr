@@ -4,7 +4,7 @@
 #' directory to cache several large IO data files in order to avoid repeated
 #' downloads. This function is a helper to (re)set the folder paths where to
 #' keep these files. The given path is stored in a config file (at the user
-#' configs location obtained from package rappdirs). Manually call this funtion
+#' configs location obtained from package rappdirs). Manually call this function
 #' with a new path to reset it.
 #'
 #' @param cache_dir If set to a character this will replace the current cache
@@ -15,9 +15,7 @@
 #' @export io_set_cache_dir
 io_set_cache_dir <- function(cache_dir = NULL, io_database = NULL) {
 
-  if (!interactive()) {
-    stop("This function should only be called in interactive mode")
-  }
+
   config_path <- rappdirs::user_config_dir("iotr")
   cache_config_path <- file.path(
     config_path,
@@ -28,6 +26,11 @@ io_set_cache_dir <- function(cache_dir = NULL, io_database = NULL) {
     cache_dir <- readLines(cache_config_path)
     if (is.null(cache_dir)) stop("Cache config file found but was empty.")
   } else {
+
+    if (!interactive()) {
+      stop("On first run or to reset the cache directory iotr::io_set_cache_dir() must be called in interactive mode!")
+    }
+
     if (!dir.exists(config_path)) {
       dir.create(config_path)
     }
