@@ -24,6 +24,6 @@ Several \verb{io_dl_*} and \verb{io_load_*} functions ask for a cache
 directory to cache several large IO data files in order to avoid repeated
 downloads. This function is a helper to (re)set the folder paths where to
 keep these files. The given path is stored in a config file (at the user
-configs location obtained from package rappdirs). Manually call this funtion
+configs location obtained from package rappdirs). Manually call this function
 with a new path to reset it.
 }

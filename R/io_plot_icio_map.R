@@ -25,6 +25,9 @@ io_plot_icio_map <-
            digits = 2,
            reverse_colors = FALSE) {
 
+  # due to NSE notes in R CMD check
+  country <- NULL
+
   if (length(colnames(plot_data)) != 2) {
     stop("Plot data must be a dataframe/tibble with a column 'country' and only one further data column")
   }
@@ -38,13 +41,13 @@ io_plot_icio_map <-
   colnames(plot_data)[data_col_id] <- "data_column"
 
   # add geography so that data can be cropped according to subplot maps
-  plot_data <- dplyr::full_join(iotr:::io_world_map, plot_data, by = "country")
+  plot_data <- dplyr::full_join(io_world_map, plot_data, by = "country")
   sf::st_agr(plot_data) <- "constant" # avoid warnings
 
   # bounding box will not cut rectangles with s2 see
   # https://github.com/r-spatial/sf/issues/1725
-  s2_state <- sf_use_s2()
-  suppressMessages(sf_use_s2(FALSE))
+  s2_state <- sf::sf_use_s2()
+  suppressMessages(sf::sf_use_s2(FALSE))
 
   plot_america <- subplot_icio_map(
     suppressMessages(
@@ -73,7 +76,7 @@ io_plot_icio_map <-
   ) +
     ggplot2::theme(legend.position = "none")
 
-  suppressMessages(sf_use_s2(s2_state))
+  suppressMessages(sf::sf_use_s2(s2_state))
 
   # south africa not on maps
   zaf_value <- plot_data$data_column[plot_data$country == "ZAF"]
@@ -127,6 +130,10 @@ io_plot_icio_map <-
 
 #' @noRd
 subplot_icio_map <- function(subplot_data, plot_data, percent = FALSE, suffix = NULL, digits = 1, reverse_colors = FALSE) {
+
+  # due to NSE notes in R CMD check
+  data_column <- NULL
+
   scale_labels <- seq(
     min(plot_data$data_column, na.rm = TRUE),
     max(plot_data$data_column, na.rm = TRUE),
