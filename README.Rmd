@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # iotr
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/okrebs/iotr/workflows/R-CMD-check/badge.svg)](https://github.com/okrebs/iotr/actions)
+[![R-CMD-check](https://github.com/okrebs/iotr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/okrebs/iotr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Overview
@@ -27,11 +27,15 @@ Download and convert I-O-data from different sources.
 
 Currently supported databases:
 
-- WIOD (see Timmer et al. 2015):
+- OECD's ICIO v2 (see OECD 2023):
     - download tables
     - convert to standardized long format
 
 - OECD's ICIO (see OECD 2021):
+    - download tables
+    - convert to standardized long format
+
+- WIOD (see Timmer et al. 2015):
     - download tables
     - convert to standardized long format
 
@@ -52,7 +56,9 @@ method proposed in Costino and Rodríguez-Clare (2014)
 small entries
 
 References: 
-- OECD (2021). OECD Inter-Country Input-Output Database. http://oe.cd/icio.
+- OECD (2023) OECD Inter-Country Input-Output Tables. http://oe.cd/icio
+
+- OECD (2021). OECD Inter-Country Input-Output Database. http://oe.cd/icio
 
 - Timmer, Marcel P., Dietzenbacher, Erik, Los, Bart, Stehrer, Robert and de
 Vries, Gaaitzen J. (2015). An Illustrated User Guide to the World Input–Output
@@ -82,7 +88,7 @@ Early development version, all functionality is subject to change!
 
 ## Examples
 
-See "man/examples/wiod.R" and "man/examples/icio.R
+See "man/examples/wiod.R", "man/examples/icio.R", and "man/examples/icio_v2.R
 
 ```{r example}
 library(iotr)
