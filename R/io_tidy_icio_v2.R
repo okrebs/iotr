@@ -43,6 +43,7 @@ io_tidy_icio_v2 <- function(icio, quiet = FALSE) {
     dplyr::mutate(
       origin = ifelse(is.na(origin), destination, origin)
     )}) %>%
+    setNames(names(icio)) %>%
     dplyr::bind_rows(.id = "year")
 
   return(icio)
