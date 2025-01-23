@@ -32,7 +32,10 @@ io_rm_negative_vad <- function(iot, category_to_scale) {
 
   location_sector_stats <- iot %>%
     dplyr::group_by(origin, sector) %>%
-    dplyr::mutate(output = sum(flow)) %>%
+    dplyr::mutate(
+      category_to_scale_demand = sum(flow[use == category_to_scale]),
+      output = sum(flow)
+    ) %>%
     dplyr::group_by(destination, use) %>%
     dplyr::mutate(intermediate_use = sum(flow)) %>%
     dplyr::ungroup() %>%
@@ -59,19 +62,37 @@ io_rm_negative_vad <- function(iot, category_to_scale) {
                    collapse = "\n"),
             "\n Recalculating table.")
 
-    changed_data <- iot %>%
-      dplyr::inner_join(vad_fix, by = c("origin", "sector")) %>%
-      dplyr::filter(use == category_to_scale) %>%
-      dplyr::group_by(origin, sector) %>%
-      dplyr::mutate(flow = flow * (sum(flow) + output_diff) / sum(flow)) %>%
-      dplyr::ungroup() %>%
-      dplyr::select(origin, sector, destination, use, flow)
-
+    if(any(vad_fix$category_to_scale_demand == 0)) {
+      message("The given category to scale has 0 use in the given table for \n",
+              paste0(utils::capture.output(
+                dplyr::filter(vad_fix, category_to_scale_demand == 0) %>%
+                dplyr::select(origin, sector))[-c(1, 3)],
+                collapse = "\n"),
+              "\n Spreading demand equally across all potential destinations.")
+      changed_data <- iot %>%
+        dplyr::inner_join(vad_fix, by = c("origin", "sector")) %>%
+        dplyr::filter(use == category_to_scale) %>%
+        dplyr::group_by(origin, sector) %>%
+        dplyr::mutate(flow = ifelse(
+          category_to_scale_demand == 0,
+          output_diff / dplyr::n(),
+          flow * (sum(flow) + output_diff) / sum(flow)
+        )) %>%
+        dplyr::ungroup() %>%
+        dplyr::select(origin, sector, destination, use, flow)
+    } else {
+      changed_data <- iot %>%
+        dplyr::inner_join(vad_fix, by = c("origin", "sector")) %>%
+        dplyr::filter(use == category_to_scale) %>%
+        dplyr::group_by(origin, sector) %>%
+        dplyr::mutate(flow = flow * (sum(flow) + output_diff) / sum(flow)) %>%
+        dplyr::ungroup() %>%
+        dplyr::select(origin, sector, destination, use, flow)
+    }
     iot <- iot %>%
       dplyr::anti_join(changed_data,
                 by = c("origin", "sector", "destination", "use")) %>%
       dplyr::bind_rows(changed_data)
-
-    return(iot)
-  }
+    }
+  return(iot)
 }
