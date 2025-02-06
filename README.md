@@ -25,14 +25,18 @@ Currently supported databases:
 - WIOD (see Timmer et al. 2015):
   - download tables
   - convert to standardized long format
+- Eora26 (see Lenzen et al. 2012, 2013; EORA account/data required)
+  - download tables
+  - convert to standardized long format
 
 Planned support:
 
-- Eora
 - USITC ITPD-IO
 - Eurostat
+- RHOMOLO
+- Full EORA
 
-Additional functionality (possibly outsourced/removed in the future):
+Additional functionality:
 
 - remove ‘dynamic’ demand categories, e.g. inventory or GFCF, following
   the method proposed in Costino and Rodríguez-Clare (2014)
@@ -57,6 +61,14 @@ References: - OECD (2023) OECD Inter-Country Input-Output Tables.
 - Costinot, Arnaud and Rodríguez-Clare, Andrés (2014). Trade Theory with
   Numbers: Quantifying the Consequences of Globalization. Handbook of
   International Economics, 4:197:261.
+
+- Lenzen M, Kanemoto K; Moran D, and Geschke A (2012) Mapping the
+  structure of the world economy. Environmental Science & Technology 46(15)
+  pp 8374–8381.
+
+- Lenzen, M., Moran, D., Kanemoto, K., Geschke, A. (2013) Building Eora: A
+  Global Multi-regional Input-Output Database at High Country and Sector
+  Resolution. Economic Systems Research, 25:1, 20-49.
 
 ## Installation
 
