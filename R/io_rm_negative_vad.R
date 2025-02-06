@@ -29,6 +29,7 @@ io_rm_negative_vad <- function(iot, category_to_scale) {
   # due to NSE notes in R CMD check
   origin <- destination <- sector <- use <- flow <- output <- vad_shr <- NULL
   intermediate_use <- imputed_vad <- output_diff <- new_output <- NULL
+  category_to_scale_demand <- NULL
 
   location_sector_stats <- iot %>%
     dplyr::group_by(origin, sector) %>%

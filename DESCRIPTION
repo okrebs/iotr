@@ -1,6 +1,6 @@
 Package: iotr
-Title: Obtain, Tidy and Modify Input-Output Tables For Quantitative Economics
-Version: 0.0.0.9001
+Title: Obtain, Tidy and Modify Input-Output Tables for Quantitative Economics
+Version: 0.0.0.9002
 Authors@R: 
     person(given = "Oliver",
            family = "Krebs",
@@ -19,6 +19,7 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
+    stats,
     magrittr,
     dplyr,
     tidyr,
@@ -31,6 +32,8 @@ Imports:
     viridis,
     cowplot,
     rappdirs,
-    rstudioapi
+    rstudioapi,
+    httr2,
+    readr
 Depends: 
-    R (>= 2.10)
+    R (>= 4.1.0)
