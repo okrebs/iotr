@@ -4,7 +4,7 @@ check_cache_dir <- function(cache_dir, quiet) {
   if (is.null(cache_dir)) {
     if (!quiet) {
       message(
-        "No cache directory given. Data will be downloaded to a temporary",
+        "No cache directory given. Data will be downloaded to a temporary ",
         "directory and deleted with the end of the Rsession."
       )
     }
